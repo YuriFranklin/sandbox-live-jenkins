@@ -1,11 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-agent'
+    }
     stages {
-        stage('Run shell') {
+        stage('Build') {
             steps {
-                script {
-                    sh 'docker --version'
-                }
+                sh 'docker --version'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'docker run --rm alpine echo "Hello, Docker!"'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose up -d'
             }
         }
     }
