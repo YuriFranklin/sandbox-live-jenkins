@@ -1,14 +1,15 @@
 pipeline {
-    agent docker
+    agent {
         docker {
-            image 'docker:latest' 
+            image 'docker:latest'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
+    }
     stages {
         stage('Run shell') {
             steps {
                 script {
-                    sh 'docker'
+                    sh 'docker --version'
                 }
             }
         }
