@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm alpine echo "Hello, Docker! 3"'
+                sh 'docker run --rm alpine echo "Hello, Docker! 4"'
             }
         }
     }
