@@ -2,20 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage ('Build Image') {
+        stage('Run shell') {
             steps {
                 script {
-                    dockerapp = docker.build("yurifranklin/sandbox-app:${env.BUILD_ID}", "-f Dockerfile")
-                }
-            }
-        }
-
-        stage ('Push Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://harbor.yuri.dev.br', '8a562a76-c9d9-412c-a677-f0213a7a680f') {
-                        dockerapp.push('latest')
-                        dockerapp.push("${env.BUILD_ID}")
+                    // Define o template do pod
+                    podTemplate(name: 'dind', label: 'dind') {
+                        node('dind') {
+                            // Executa os comandos dentro do contêiner Docker
+                            container('dind') {
+                                sh 'docker'
+                            }
+                        }
                     }
                 }
             }
