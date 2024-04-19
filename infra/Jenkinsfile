@@ -1,21 +1,9 @@
-pipeline {
-    agent any
-
-    stages {
+podTemplate {
+    node("jenkins-agent") {
         stage('Run shell') {
-            steps {
-                script {
-                    // Define o template do pod
-                    podTemplate(name: 'dind', label: 'dind') {
-                        node('dind') {
-                            // Executa os comandos dentro do contêiner Docker
-                            container('dind') {
-                                sh 'docker'
-                            }
-                        }
-                    }
-                }
-            }
+           container('dind') {
+            sh 'docker'
+        }
         }
     }
 }
