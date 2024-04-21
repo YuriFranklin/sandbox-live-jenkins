@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
-                    dockerapp = docker.build("sandbox-app:${env.BUILD_ID}", "-f infra/Dockerfile .")
+                    dockerapp = docker.build("sandbox-app/sandbox-app:${env.BUILD_ID}", "-f infra/Dockerfile .")
                 }
             }
         }
