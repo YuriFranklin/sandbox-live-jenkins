@@ -6,11 +6,15 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'docker --version'
+                dockerapp = docker.build("yurifranklin/sandbox-app:${env.BUILD_ID}", "-f Dockerfile")
             }
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm alpine echo "Hello, Docker! 6"'
+                docker.withRegistry('https://harbor.yuri.dev.br', '001e7a16-1498-40de-b191-bdd9d57f6f76') {
+                    dockerapp.push('latest')
+                    dockerapp.push("${env.BUILD_ID}")
+                }
             }
         }
     }
