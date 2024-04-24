@@ -7,14 +7,14 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
-                    dockerapp = docker.build("sandbox-app/test:${env.BUILD_ID}", "-f infra/Dockerfile .")
+                    dockerapp = docker.build("nexus.yuri.dev.br/sandbox-app:${env.BUILD_ID}", "-f infra/Dockerfile .")
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    docker.withRegistry('https://harbor.yuri.dev.br', '001e7a16-1498-40de-b191-bdd9d57f6f76') {
+                    docker.withRegistry('https://nexus.yuri.dev.br', 'e9a997ff-2f07-45c2-84f3-a1b4320a5bbf') {
                         dockerapp.push('latest')
                         dockerapp.push("${env.BUILD_ID}")
                     }
