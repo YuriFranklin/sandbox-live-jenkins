@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sandbox-app-service
+  name: sandbox-app
 spec:
   selector:
     app: sandbox-app
@@ -44,10 +44,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: sandbox.yuri.dev.br
+    - host: "sandbox.yuri.dev.br"
       http:
         paths:
-          - path: /
+          - path: "/"
             pathType: Prefix
             backend:
               service:
