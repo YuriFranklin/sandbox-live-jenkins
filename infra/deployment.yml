@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: sandbox-app
-          image: nexus.yuri.dev.br/sandbox-app:24
+          image: nexus.yuri.dev.br/sandbox-app:25
           ports:
             - containerPort: 5000
       imagePullSecrets:
