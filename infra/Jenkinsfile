@@ -35,7 +35,7 @@ pipeline {
                         sed -i "s|image: nexus.yuri.dev.br/sandbox-app:.*|image: nexus.yuri.dev.br/sandbox-app:${env.BUILD_ID}|" infra/deployment.yml
                         git add infra/deployment.yml
                         git commit -m "jenkins: updated image to version ${env.BUILD_ID}"
-                        git push "https://${GITHUB_TOKEN}@github.com/${env.GIT_USER_NAME}/${env.GIT_REPO_NAME} HEAD:main"
+                        git push "https://${env.GITHUB_TOKEN}@github.com/${env.GIT_USER_NAME}/${env.GIT_REPO_NAME} HEAD:main"
                     '''
                 }
             }
