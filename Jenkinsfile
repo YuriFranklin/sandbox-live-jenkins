@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker --version'
-                    dockerapp = docker.build("registry.yuri.dev.br/sandbox-app:${env.BUILD_ID}", "-f infra/Dockerfile .")
+                    dockerapp = docker.build("registry.yuri.dev.br/sandbox-app:${env.BUILD_ID}", "-f Dockerfile .")
                 }
             }
         }
